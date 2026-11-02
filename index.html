@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Catalogue Gamme Renault</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
+<style>
+html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Concept : catalogue de concession, cartes modèles du moins cher au plus cher, jaune Renault sur encre bleutée */
+:root{--bg:#f4f4ef;--card:#ffffff;--ink:#14161c;--muted:#5d6270;--line:#dcdcd2;--yellow:#ffcc00;--yellow-ink:#14161c;--soft:#f0efe6;--ev:#0a8f6a;--hy:#2563c9;--th:#b4540a;--stage:#ecebdf;
+--fd:'Barlow Condensed','Arial Narrow',sans-serif;--fb:'Barlow',system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101319;--card:#1a1e27;--ink:#f1f1ea;--muted:#9aa0ae;--line:#2c313d;--soft:#232834;--ev:#3ddba8;--hy:#7fb0ff;--th:#ffa45c;--stage:#222733;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101319;--card:#1a1e27;--ink:#f1f1ea;--muted:#9aa0ae;--line:#2c313d;--soft:#232834;--ev:#3ddba8;--hy:#7fb0ff;--th:#ffa45c;--stage:#222733;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.45;padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between;border-bottom:4px solid var(--yellow);padding-bottom:16px}
+h1{font-family:var(--fd);font-weight:800;font-size:clamp(34px,6vw,56px);line-height:.95;margin:0;text-transform:uppercase;letter-spacing:.01em}
+h1 span{background:var(--yellow);color:var(--yellow-ink);padding:0 .15em}
+.sub{color:var(--muted);margin:8px 0 0;max-width:52ch}
+.count{font-family:var(--fd);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin:20px 0}
+.grp{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lbl{font-family:var(--fd);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--muted)}
+button{font:inherit;cursor:pointer;color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--hy);outline-offset:2px}
+.pill{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-weight:600;font-size:14px}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input[type=range]{accent-color:var(--yellow);width:min(220px,60vw)}
+.budget{font-family:var(--fd);font-weight:700;font-size:20px;min-width:90px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.stage{position:relative;background:var(--stage);padding:14px 12px 4px}
+.stage svg{display:block;width:100%;height:auto;max-height:170px}
+.rank{position:absolute;top:10px;left:12px;font-family:var(--fd);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tags{position:absolute;top:8px;right:10px;display:flex;gap:6px}
+.tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:4px;background:var(--card);border:1px solid currentColor}
+.tag.ev{color:var(--ev)}.tag.hy{color:var(--hy)}.tag.th{color:var(--th)}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+h2{font-family:var(--fd);font-weight:800;font-size:30px;line-height:1;margin:0;text-transform:uppercase}
+.from{text-align:right;line-height:1}
+.from small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+.from b{font-family:var(--fd);font-size:28px;font-weight:800;background:var(--yellow);color:var(--yellow-ink);padding:1px 8px;display:inline-block;white-space:nowrap}
+.facts{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.facts b{color:var(--ink);font-variant-numeric:tabular-nums}
+.engines{display:flex;flex-wrap:wrap;gap:6px}
+.eng{border:1.5px solid var(--line);background:var(--soft);border-radius:8px;padding:5px 10px;font-size:13px;font-weight:600;text-align:left}
+.eng small{font-weight:500;opacity:.85;font-size:12px}
+.eng[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.spec{background:var(--soft);border-radius:8px;padding:8px 10px;font-size:13px;min-height:2.9em}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:right;white-space:nowrap}
+th{font-family:var(--fd);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--soft);font-weight:700}
+th:first-child,td:first-child{text-align:left;white-space:normal;font-weight:600}
+tr+tr td{border-top:1px solid var(--line)}
+td.na{color:var(--muted);opacity:.6}
+td.min{font-weight:700}
+.note{font-size:12px;color:var(--muted);margin:0}
+footer{margin-top:28px;color:var(--muted);font-size:13px;max-width:80ch}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-3px)}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div><h1>Gamme <span>Renault</span></h1>
+ <p class="sub">12 modèles du moins cher au plus cher, avec toutes les finitions, motorisations, batteries et prix TTC catalogue.</p></div>
+ <div class="count" id="count"></div>
+</header>
+<div class="bar">
+ <div class="grp" id="energy"><span class="lbl">Énergie</span></div>
+ <div class="grp"><span class="lbl">Budget max</span><input type="range" id="budget" min="20000" max="60000" step="1000" value="60000" aria-label="Budget maximum"><span class="budget" id="bv"></span></div>
+ <div class="grp"><button class="pill" id="sort" aria-pressed="false">Du plus cher au moins cher</button></div>
+</div>
+<div class="grid" id="grid"></div>
+<footer>Prix TTC catalogue France, relevés dans la presse auto (L'argus, Renault, sites spécialisés) et à vérifier avant toute offre client. Illustrations schématiques, non contractuelles. Rafale et Symbioz : grilles issues d'une seule source. R4 Techno et Iconic : prix de lancement 2025. R5 Five : commande à partir de fin 2026. Autonomies WLTP : en km électriques pour les électriques et la Rafale rechargeable, en km au total (plein + batterie) pour les thermiques et hybrides. Captur essence/GPL : estimations avant homologation. Espace : valeurs en cours d'homologation.</footer>
+</div>
+
+<script>
+const E=(id,label,short,spec,range)=>({id,label,short,spec,range});
+const M=[
+{n:"Twingo E-Tech",k:["ev"],body:"city",col:"#7fd1c1",boot:"260–360 L",bat:"27,5 kWh LFP",
+ eng:[E("e","Électrique 82 ch","27,5 kWh","82 ch · batterie LFP 27,5 kWh","263 km")],
+ tr:[["Evolution",{e:19490}],["Evolution + pack Advanced Charge",{e:19990}],["Techno",{e:21090}]]},
+{n:"Clio",k:["th","hy"],body:"city",col:"#e8573a",boot:"391 L",
+ eng:[E("tcem","TCe 115 manuelle","TCe 115 BVM","Essence 115 ch, boîte manuelle","jusqu'à 765 km"),E("tcea","TCe 115 EDC","TCe 115 EDC","Essence 115 ch, boîte auto EDC","jusqu'à 765 km"),E("hy","Full hybrid E-Tech 160","E-Tech 160","Full hybrid 160 ch, boîte auto","jusqu'à 1 000 km"),E("gpl","Eco-G 120 GPL","Eco-G 120","Bicarburation essence/GPL 120 ch, tarif non relevé.","jusqu'à 1 450 km")],
+ tr:[["Evolution",{tcem:19900,tcea:21400,hy:24600}],["Techno",{tcem:23900,tcea:25400,hy:27600}],["Esprit Alpine",{tcea:27600,hy:29300}]]},
+{n:"R5 E-Tech",k:["ev"],body:"city",col:"#f2a31b",boot:"326 L",
+ eng:[E("e110","110 ch","110 ch · 36,5 kWh","110 ch · batterie LFP 36,5 kWh","305 km"),E("e120","120 ch","120 ch · 40 kWh","120 ch · batterie 40 kWh","321 km"),E("e150","150 ch","150 ch · 52 kWh","150 ch · batterie 52 kWh","431 km")],
+ tr:[["Five (commande fin 2026)",{e110:24990}],["Evolution",{e120:28490,e150:31990}],["Techno",{e120:30490,e150:33990}],["Iconic Cinq",{e150:35490}],["Roland-Garros",{e150:36490}]]},
+{n:"Captur",k:["th","hy"],body:"cross",col:"#3a7bd5",boot:"422–536 L (hybride ≈ 348–440 L)",
+ eng:[E("eco","Eco-G 120 GPL","Eco-G 120","Bicarburation essence/GPL 120 ch","jusqu'à 1 400 km (estimation)"),E("tce","TCe 115","TCe 115","Essence 115 ch","jusqu'à 1 400 km (estimation)"),E("hy","Full hybrid E-Tech 160","E-Tech 160","Full hybrid 160 ch","jusqu'à 1 000 km")],
+ tr:[["Evolution",{eco:26800,tce:27300,hy:30500}],["Techno",{eco:29100,tce:29600,hy:32800}],["Esprit Alpine",{hy:35200}]]},
+{n:"Symbioz",k:["th","hy"],body:"cross",col:"#8a63d2",boot:"492–624 L (1 582 L banquette rabattue)",
+ eng:[E("eco","Eco-G 120 GPL","Eco-G 120","Essence/GPL 120 ch","jusqu'à 1 500 km"),E("hy","Full hybrid E-Tech 160","E-Tech 160","Full hybrid 160 ch","jusqu'à 1 000 km")],
+ tr:[["Evolution",{eco:29900,hy:34400}],["Techno",{eco:31900,hy:36400}],["Esprit Alpine",{hy:37900}],["Iconic",{hy:39400}]]},
+{n:"R4 E-Tech",k:["ev"],body:"cross",col:"#2fb3a0",boot:"420 L",
+ eng:[E("e120","120 ch","120 ch · 40 kWh","120 ch · batterie 40 kWh","308 km"),E("e150","150 ch","150 ch · 52 kWh","150 ch · batterie 52 kWh","412 km")],
+ tr:[["Evolution",{e120:29990,e150:33490}],["Techno",{e150:35490}],["Iconic",{e150:37490}]],
+ extra:"Version Jogging (LFP 37 kWh, 305 km) annoncée fin 2026, prix inconnu."},
+{n:"Kangoo E-Tech",k:["ev"],body:"mpv",col:"#e6b422",boot:"850 L (950 L tablette avancée)",
+ eng:[E("e","Électrique 120 ch","120 ch · 45 kWh","120 ch · batterie 45 kWh","297 km (272 km en Grand Kangoo ; 285 km selon un essai de 2022)")],
+ tr:[["Evolution",{e:37500}],["Grand Kangoo 7 places",{e:41500}]]},
+{n:"Mégane E-Tech",k:["ev"],body:"cross",col:"#d6455d",boot:"440 L",
+ eng:[E("e","Électrique 220 ch","220 ch · 67 kWh","220 ch · batterie LFP 67 kWh","501 km")],
+ tr:[["Techno",{e:37500}],["Esprit Alpine",{e:40500}]]},
+{n:"Austral",k:["hy"],body:"suv",col:"#4a5568",boot:"jusqu'à 657 L",
+ eng:[E("hy","Full hybrid E-Tech 200","E-Tech 200","Full hybrid 200 ch","jusqu'à 1 100 km")],
+ tr:[["Techno Series (800 ex., commande dès le 3 nov.)",{hy:39900}],["Evolution",{hy:41900}],["Techno",{hy:43100}],["Esprit Alpine",{hy:46000}]]},
+{n:"Scénic E-Tech",k:["ev"],body:"mpv",col:"#2c9a6b",boot:"545 L",
+ eng:[E("e67","220 ch · 67 kWh","220 ch · 67 kWh","220 ch · batterie LFP 67 kWh","467 km"),E("e89","220 ch · 89 kWh","220 ch · 89 kWh","220 ch · batterie NMC 89 kWh","642 km")],
+ tr:[["Techno",{e67:39990,e89:46990}],["Esprit Alpine (option sur Techno)",{e89:49090}],["Iconic (option sur Techno)",{e89:52590}]]},
+{n:"Rafale",k:["hy"],body:"coupe",col:"#c0392b",boot:"627 L (469 L en 4x4 300)",
+ eng:[E("hy","Full hybrid E-Tech 200","E-Tech 200","Full hybrid 200 ch, réservoir 55 L","≈ 1 050 km (théorique, non homologué)"),E("ph","E-Tech 4x4 300 rechargeable","4x4 300 PHEV","Hybride rechargeable 300 ch, batterie 22 kWh, jusqu'à 1 000 km au total","105 km élec. · 1 000 km total")],
+ tr:[["Techno",{hy:45000,ph:54000}],["Esprit Alpine",{hy:49000,ph:60000}]],
+ extra:"Selon les sources, Techno hybride 45 500 € et 4x4 300 Esprit Alpine 54 500 €."},
+{n:"Espace",k:["hy"],body:"mpv",col:"#6b4fbb",boot:"581–777 L (5 places) · 477–677 L (7 places, 3e rang rabattu)",
+ eng:[E("h5","Full hybrid 200 · 5 places","5 places","Full hybrid E-Tech 200, 5 places","jusqu'à 1 100 km"),E("h7","Full hybrid 200 · 7 places","7 places","Full hybrid E-Tech 200, 7 places (159 L avec 7 occupants)","jusqu'à 1 100 km")],
+ tr:[["Techno",{h5:46000,h7:46500}],["Esprit Alpine",{h5:49300,h7:49800}],["Iconic",{h5:51300,h7:51800}]]}
+];
+M.forEach((m,i)=>{m.min=Math.min(...m.tr.flatMap(t=>Object.values(t[1])));m.i=i+1;});
+
+const KL={ev:"Électrique",hy:"Hybride",th:"Essence / GPL"};
+const P={
+ city:{b:"M18 74 L18 60 Q20 52 36 50 L66 34 Q74 28 92 28 L146 28 Q160 29 170 42 L204 48 Q224 52 224 64 L224 74 Z",w:"M76 35 L92 33 L116 33 L116 48 L62 48 Z M122 33 L146 33 Q156 34 162 46 L122 48 Z"},
+ cross:{b:"M16 76 L16 60 Q18 50 36 48 L64 30 Q72 24 92 24 L156 24 Q172 26 182 42 L208 48 Q226 52 226 64 L226 76 Z",w:"M72 32 L92 29 L118 29 L118 46 L58 46 Z M124 29 L154 29 Q166 31 174 45 L124 46 Z"},
+ suv:{b:"M14 78 L14 58 Q16 48 34 46 L60 28 Q70 20 94 20 L160 20 Q178 22 190 40 L212 46 Q228 50 228 64 L228 78 Z",w:"M68 30 L92 25 L120 25 L120 44 L56 44 Z M126 25 L158 25 Q172 28 182 43 L126 44 Z"},
+ mpv:{b:"M16 78 L16 54 Q18 44 34 42 L58 22 Q66 16 90 16 L164 16 Q180 18 188 36 L212 44 Q228 48 228 62 L228 78 Z",w:"M64 26 L88 21 L112 21 L112 42 L52 42 Z M118 21 L146 21 L146 42 L118 42 Z M152 21 L164 21 Q176 24 182 41 L152 42 Z"},
+ coupe:{b:"M14 78 L14 60 Q16 50 36 48 L76 30 Q96 20 126 20 L158 22 Q184 28 204 46 Q228 50 228 64 L228 78 Z",w:"M84 34 Q100 26 124 26 L152 28 Q170 34 186 46 L74 46 Z"}
+};
+function car(m){
+ const p=P[m.body],d=m.col;
+ return `<svg viewBox="0 0 240 100" role="img" aria-label="Illustration ${m.n}"><ellipse cx="120" cy="90" rx="100" ry="4" fill="#000" opacity=".15"/><path d="${p.b}" fill="${d}"/><path d="${p.w}" fill="#cfe6f2" stroke="${d}" stroke-width="1.5"/><path d="${p.b}" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="1.5"/><rect x="20" y="62" width="10" height="4" rx="2" fill="#fff6c9"/><rect x="214" y="60" width="8" height="4" rx="2" fill="#ff5a4d"/>${[62,178].map(x=>`<circle cx="${x}" cy="76" r="19" fill="#14161c"/><circle cx="${x}" cy="76" r="9" fill="#c9ccd4"/><circle cx="${x}" cy="76" r="3" fill="#14161c"/>`).join("")}</svg>`;
+}
+const fmt=n=>n.toLocaleString("fr-FR")+" €";
+const state={energy:"all",budget:60000,desc:false,sel:{}};
+
+function card(m){
+ const sel=state.sel[m.n]||null;
+ const engs=sel?m.eng.filter(e=>e.id===sel):m.eng.filter(e=>m.tr.some(t=>t[1][e.id]!=null));
+ const shown=sel?engs:engs;
+ const cols=sel?m.eng.filter(e=>e.id===sel):m.eng;
+ const colsP=cols.filter(e=>m.tr.some(t=>t[1][e.id]!=null));
+ const se=sel?m.eng.find(e=>e.id===sel):null;
+ const specTxt=se?`<b>${se.label}</b> — ${se.spec}${se.range?` · autonomie ${se.range}`:""}`:"Touchez une motorisation pour filtrer le tableau. Autonomie WLTP indiquée sous chaque motorisation.";
+ const rows=m.tr.filter(t=>!sel||t[1][sel]!=null).map(t=>{
+  const vals=Object.values(t[1]);const mn=Math.min(...vals);
+  return `<tr><td>${t[0]}</td>${colsP.map(e=>{const v=t[1][e.id];return v==null?`<td class="na">—</td>`:`<td${v===mn&&!sel?' class="min"':''}>${fmt(v)}</td>`}).join("")}</tr>`}).join("");
+ const head=`<tr><th>Finition</th>${colsP.map(e=>`<th>${e.short}</th>`).join("")}</tr>`;
+ const kinds=m.k.map(k=>`<span class="tag ${k}">${KL[k]}</span>`).join("");
+ const ranges=m.eng.filter(e=>e.range).map(e=>e.range);
+ const facts=`<span>Coffre <b>${m.boot}</b></span>${m.bat?`<span>Batterie <b>${m.bat}</b></span>`:""}`;
+ return `<article class="card" data-n="${m.n}"><div class="stage"><span class="rank">N° ${m.i} · prix d'entrée</span><div class="tags">${kinds}</div>${car(m)}</div>
+ <div class="body"><div class="head"><h2>${m.n}</h2><div class="from"><small>dès</small><b>${fmt(m.min)}</b></div></div>
+ <div class="facts">${facts}</div>
+ <div class="engines" role="group" aria-label="Motorisations ${m.n}">${m.eng.map(e=>`<button class="eng" data-e="${e.id}" aria-pressed="${sel===e.id}">${e.label}${e.range?`<br><small>${e.range}</small>`:""}</button>`).join("")}</div>
+ <div class="spec">${specTxt}</div>
+ <div class="tw"><table><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+ ${m.extra?`<p class="note">${m.extra}</p>`:""}</div></article>`;
+}
+function render(){
+ let list=M.filter(m=>(state.energy==="all"||m.k.includes(state.energy))&&m.min<=state.budget);
+ list=[...list].sort((a,b)=>state.desc?b.min-a.min:a.min-b.min);
+ document.getElementById("grid").innerHTML=list.length?list.map(card).join(""):`<div class="empty">Aucun modèle pour ce budget. Augmentez le budget maximum.</div>`;
+ document.getElementById("count").textContent=list.length+" modèle"+(list.length>1?"s":"");
+ document.getElementById("bv").textContent=state.budget>=60000?"Illimité":fmt(state.budget);
+}
+const en=document.getElementById("energy");
+[["all","Tous"],["ev","Électrique"],["hy","Hybride"],["th","Essence / GPL"]].forEach(([k,l])=>{
+ const b=document.createElement("button");b.className="pill";b.textContent=l;b.setAttribute("aria-pressed",k==="all");b.dataset.k=k;
+ b.onclick=()=>{state.energy=k;en.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.k===k));render()};en.appendChild(b)});
+document.getElementById("budget").oninput=e=>{state.budget=+e.target.value;render()};
+const sb=document.getElementById("sort");
+sb.onclick=()=>{state.desc=!state.desc;sb.setAttribute("aria-pressed",state.desc);sb.textContent=state.desc?"Du moins cher au plus cher":"Du plus cher au moins cher";render()};
+document.getElementById("grid").addEventListener("click",ev=>{
+ const b=ev.target.closest(".eng");if(!b)return;
+ const n=b.closest(".card").dataset.n,id=b.dataset.e;
+ state.sel[n]=state.sel[n]===id?null:id;render();
+ const c=[...document.querySelectorAll(".card")].find(x=>x.dataset.n===n);const bb=c&&c.querySelector(`.eng[data-e="${id}"]`);if(bb)bb.focus();
+});
+render();
+</script>
+
+</body>
+</html>
